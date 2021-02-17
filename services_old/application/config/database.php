@@ -1,4 +1,7 @@
-<?php  if ( ! defined('BASEPATH')) exit('No direct script access allowed');
+<?php if (!defined('BASEPATH')) {
+	exit('No direct script access allowed');
+}
+
 /*
 | -------------------------------------------------------------------
 | DATABASE CONNECTIVITY SETTINGS
@@ -17,7 +20,7 @@
 |	['password'] The password used to connect to the database
 |	['database'] The name of the database you want to connect to
 |	['dbdriver'] The database type. ie: mysql.  Currently supported:
-				 mysql, mysqli, postgre, odbc, mssql, sqlite, oci8
+mysql, mysqli, postgre, odbc, mssql, sqlite, oci8
 |	['dbprefix'] You can add an optional prefix, which will be added
 |				 to the table name when using the  Active Record class
 |	['pconnect'] TRUE/FALSE - Whether to use a persistent connection
@@ -29,7 +32,7 @@
 |				 NOTE: For MySQL and MySQLi databases, this setting is only used
 | 				 as a backup if your server is running PHP < 5.2.3 or MySQL < 5.0.7
 |				 (and in table creation queries made with DB Forge).
-| 				 There is an incompatibility in PHP with mysql_real_escape_string() which
+| 				 There is an incompatibility in PHP with mysqli_real_escape_string() which
 | 				 can make your site vulnerable to SQL injection if you are using a
 | 				 multi-byte character set and are running versions lower than these.
 | 				 Sites using Latin-1 or UTF-8 database character set and collation are unaffected.
@@ -43,13 +46,13 @@
 |
 | The $active_record variables lets you determine whether or not to load
 | the active record class
-*/
+ */
 
-$active_group = 'default';
+$active_group  = 'default';
 $active_record = TRUE;
 
-if (file_exists(BASEPATH.'../../main_config.php')) {
-	require_once BASEPATH.'../../main_config.php';
+if (file_exists(BASEPATH . '../../main_config.php')) {
+	require_once BASEPATH . '../../main_config.php';
 
 	$db['default']['hostname'] = DATABASE_HOST;
 	$db['default']['username'] = DATABASE_USERNAME;
