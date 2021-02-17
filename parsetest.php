@@ -50,7 +50,7 @@ file_put_contents("DateRepository.txt", $dateTimeArray);
 
 $sql7 = substr($sql7, 0, (strlen($sql7) - 2));
 echo ($sql7);
-$result7 = @mysql_query($sql7, $connection) or die(mysqli_error($connect));
+$result7 = mysqli_query($connection, $sql7) or die(mysqli_error($connect));
 echo ($result7);
 echo ("tests");
 

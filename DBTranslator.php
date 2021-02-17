@@ -37,7 +37,7 @@ function transQuery($inputquery, $sendTrans = 1, $returnTrans = 1) {
 function makeRequest($query) {
 
 	global $connect;
-	$finalResult = @mysql_query($query, $connect) or die(mysqli_error($connect));
+	$finalResult = mysqli_query($connect, $query) or die(mysqli_error($connect));
 	return $finalResult;
 
 }
@@ -64,9 +64,9 @@ function translateQuery($inputquery) {
 		}
 		$key1    = utf8_encode($key);
 		$sql2    = "SELECT EngText FROM  `spanish` WHERE  `SpanishText` =  '$key1' LIMIT 0 , 1";
-		$result2 = @mysql_query($sql2, $connect) or die("Error" . mysqli_error($connect));
+		$result2 = mysqli_query($connect, $sql2) or die("Error" . mysqli_error($connect));
 		if (mysqli_num_rows($result2) > 0):
-			$row        = mysql_fetch_assoc($result2);
+			$row        = mysqli_fetch_assoc($result2);
 			$data[$key] = $row['EngText'];
 //Do Replacement
 			$inputquery = str_replace($key, $row['EngText'], $inputquery);
@@ -89,7 +89,7 @@ function translateResult($result, $returnTrans = 1) {
 	}
 
 	$outputData = array();
-	while ($row = mysql_fetch_array($result, MYSQL_ASSOC)) {
+	while ($row = mysqli_fetch_array($result, MYSQLI_ASSOC)) {
 
 		$row1 = array();
 		foreach ($row as $key => $value):
@@ -130,9 +130,9 @@ function translateWord($value, $rev = 0) {
 		$sql2 = "SELECT SpanishText FROM  `spanish` WHERE  `EngText` =  '$value' LIMIT 0 , 1";
 	}
 
-	$result2 = @mysql_query($sql2, $connect) or die(mysqli_error($connect));
+	$result2 = mysqli_query($connect, $sql2) or die(mysqli_error($connect));
 	if (mysqli_num_rows($result2) > 0) {
-		$row = mysql_fetch_assoc($result2);
+		$row = mysqli_fetch_assoc($result2);
 
 		if ($rev == 1) {
 			return utf8_decode($row['EngText']);

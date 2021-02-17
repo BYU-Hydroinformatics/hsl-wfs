@@ -61,7 +61,7 @@ function update_series_catalog($siteID, $variableID, $methodID, $sourceID, $qcID
   	qc.QualityControlLevelID, qc.QualityControlLevelCode";
 
 		// run query
-		$valuesresult = mysql_query($long_query);
+		$valuesresult = mysqli_query($connect, $long_query);
 		if (!$valuesresult) {
 			die("<p>Error in executing the SQL query " . $long_query . ": " .
 				mysqli_error($connect) . "</p>");
@@ -72,7 +72,7 @@ function update_series_catalog($siteID, $variableID, $methodID, $sourceID, $qcID
 		}
 
 		// find entries to SeriesCatalog from joining DataValues and other tables
-		$row                     = mysql_fetch_assoc($valuesresult);
+		$row                     = mysqli_fetch_assoc($valuesresult);
 		$siteID                  = $row['SiteID'];
 		$siteCode                = $row['SiteCode'];
 		$siteName                = $row['SiteName'];
@@ -125,7 +125,7 @@ function update_series_catalog($siteID, $variableID, $methodID, $sourceID, $qcID
   	'$qualityControlLevelID', '$qualityControlLevelCode', '$beginDateTime', '$endDateTime',
   	'$beginDateTimeUTC', '$endDateTimeUTC', '$valueCount')";
 
-		$insertresult = mysql_query($insert);
+		$insertresult = mysqli_query($connect, $insert);
 		if (!$insertresult) {
 			die("<p>Error in executing the SQL query " . $insert . ": " .
 				mysqli_error($connect) . "</p>");
@@ -167,7 +167,7 @@ function update_series_catalog($siteID, $variableID, $methodID, $sourceID, $qcID
   	 qc.QualityControlLevelID, qc.QualityControlLevelCode";
 
 		// run query
-		$valuesresult = mysql_query($mid_query);
+		$valuesresult = mysqli_query($connect, $mid_query);
 		if (!$valuesresult) {
 			die("<p>Error in executing the SQL query " . $mid_query . ": " .
 				mysqli_error($connect) . "</p>");
@@ -178,7 +178,7 @@ function update_series_catalog($siteID, $variableID, $methodID, $sourceID, $qcID
 		}
 
 		// find entries to SeriesCatalog from joining DataValues and other tables
-		$row                     = mysql_fetch_assoc($valuesresult);
+		$row                     = mysqli_fetch_assoc($valuesresult);
 		$siteID                  = $row['SiteID'];
 		$variableID              = $row['VariableID'];
 		$variableCode            = $row['VariableCode'];
@@ -218,7 +218,7 @@ function update_series_catalog($siteID, $variableID, $methodID, $sourceID, $qcID
   	QualityControlLevelID = '$qualityControlLevelID', QualityControlLevelCode = '$qualityControlLevelCode'
   	 WHERE SeriesID = '$series_id';";
 
-		$updateresult = mysql_query($update);
+		$updateresult = mysqli_query($connect, $update);
 		if (!$updateresult) {
 			die("<p>Error in executing the SQL query " . $update . ": " .
 				mysqli_error($connect) . "</p>");
@@ -239,7 +239,7 @@ function update_series_catalog($siteID, $variableID, $methodID, $sourceID, $qcID
   	AND dv.QualityControlLevelID = $qcID";
 
 		// run query
-		$valuesresult = mysql_query($short_query);
+		$valuesresult = mysqli_query($connect, $short_query);
 		if (!$valuesresult) {
 			die("<p>Error in executing the SQL query " . $short_query . ": " .
 				mysqli_error($connect) . "</p>");
@@ -250,7 +250,7 @@ function update_series_catalog($siteID, $variableID, $methodID, $sourceID, $qcID
 		}
 
 		// get values for update
-		$row              = mysql_fetch_assoc($valuesresult);
+		$row              = mysqli_fetch_assoc($valuesresult);
 		$beginDateTime    = $row['BeginDateTime'];
 		$endDateTime      = $row['EndDateTime'];
 		$beginDateTimeUTC = $row['BeginDateTimeUTC'];
@@ -263,7 +263,7 @@ function update_series_catalog($siteID, $variableID, $methodID, $sourceID, $qcID
   	 BeginDateTimeUTC = '$beginDateTimeUTC', EndDateTimeUTC = '$endDateTimeUTC', ValueCount = '$valueCount'
   	 WHERE SeriesID = '$series_id';";
 
-		$updateresult = mysql_query($update);
+		$updateresult = mysqli_query($connect, $update);
 		if (!$updateresult) {
 			die("<p>Error in executing the SQL query " . $update . ": " .
 				mysqli_error($connect) . "</p>");
@@ -277,7 +277,7 @@ function db_find_seriesid($siteID, $variableID, $methodID, $sourceID, $qcID) {
 	$query_text = "SELECT SeriesID FROM seriescatalog WHERE
   SiteID=$siteID AND VariableID=$variableID AND MethodID=$methodID AND SourceID=$sourceID AND QualityControlLevelID=$qcID";
 
-	$result = mysql_query($query_text);
+	$result = mysqli_query($connect, $query_text);
 
 	if (!$result) {
 		die("<p>Error in executing the SQL query " . $query_text . ": " .
@@ -287,7 +287,7 @@ function db_find_seriesid($siteID, $variableID, $methodID, $sourceID, $qcID) {
 	if ($num_rows == 0) {
 		return 0;
 	} else {
-		$val = mysql_fetch_assoc($result);
+		$val = mysqli_fetch_assoc($result);
 		return $val['SeriesID'];
 	}
 }
@@ -297,7 +297,7 @@ function db_find_seriesid2($siteID, $sourceID) {
 	$query_text = "SELECT SeriesID FROM seriescatalog WHERE
 	SiteID=$siteID AND SourceID=$sourceID AND ValueCount=0";
 
-	$result = mysql_query($query_text);
+	$result = mysqli_query($connect, $query_text);
 
 	if (!$result) {
 		die("<p>Error in executing the SQL query " . $query_text . ": " .
@@ -307,7 +307,7 @@ function db_find_seriesid2($siteID, $sourceID) {
 	if ($num_rows == 1) {
 		return 0;
 	} else {
-		$val = mysql_fetch_assoc($result);
+		$val = mysqli_fetch_assoc($result);
 		return $val['SeriesID'];
 	}
 }

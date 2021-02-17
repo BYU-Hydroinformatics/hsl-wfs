@@ -163,21 +163,21 @@ if ((!$singleInstall) && ($worldInstall)) {
 }
 //Create the admin username and password.
 
-$connect = mysql_connect($_POST['databasehost'], $_POST['databaseusername'], $_POST['databasepassword'])
+$connect = mysqli_connect($_POST['databasehost'], $_POST['databaseusername'], $_POST['databasepassword'])
 or die("Error connecting to database: " .
 	mysqli_error($connect) . "");
 
-$bool = mysql_select_db($_POST['databasename'], $connect)
+$bool = mysqli_select_db($connect, $_POST['databasename'])
 or die("Error selecting the database " . $_POST['databasename'] .
 	mysqli_error($connect) . "");
 
 //While loop checks if the table has been created or not. If created then good else keeps looping.
-while (mysqli_num_rows(mysql_query("SHOW TABLES LIKE 'moss_users'")) != 1) {
+while (mysqli_num_rows(mysqli_query($connect, "SHOW TABLES LIKE 'moss_users'")) != 1) {
 }
 
 $sql = "INSERT INTO `moss_users`(`firstname`, `lastname`, `username`, `password`, `authority`) VALUES ('admin', 'admin', 'his_admin', PASSWORD('" . $_POST['password'] . "'), 'admin')";
 
-$result = @mysql_query($sql, $connect) or die(mysqli_error($connect));
+$result = mysqli_query($connect, $sql) or die(mysqli_error($connect));
 
 echo ($result);
 
