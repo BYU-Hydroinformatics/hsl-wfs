@@ -11,7 +11,7 @@ This file will be populated while deployment
 
 //MySql Database Configuration Settings
 
-define("DATABASE_HOST", "128.187.103.131"); //for example define("DATABASE_HOST", "your_database_host");
+define("DATABASE_HOST", "localhost"); //for example define("DATABASE_HOST", "your_database_host");
 define("DATABASE_USERNAME", "WWO_Admin"); //for example define("DATABASE_USERNAME", "your_database_username");
 define("DATABASE_NAME", "sandbox"); //for example define("DATABASE_NAME", "your_database_name");
 define("DATABASE_PASSWORD", "isaiah4118"); //for example define("DATABASE_PASSWORD", "your_database_password");
