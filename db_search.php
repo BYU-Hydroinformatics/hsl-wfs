@@ -18,10 +18,10 @@ $parnode = $dom->appendChild($node);
 
 // Search the rows in the markers table
 $query = sprintf("SELECT SiteID, SiteCode,SiteName, Latitude, Longitude, SiteType, ( 3959 * acos( cos( radians('%s') ) * cos( radians( Latitude ) ) * cos( radians( Longitude ) - radians('%s') ) + sin( radians('%s') ) * sin( radians( Latitude ) ) ) ) AS distance FROM sites HAVING distance < '%s' ORDER BY distance",
-	mysqli_real_escape_string($center_lat),
-	mysqli_real_escape_string($center_lng),
-	mysqli_real_escape_string($center_lat),
-	mysqli_real_escape_string($radius));
+	mysqli_real_escape_string($connect, $center_lat),
+	mysqli_real_escape_string($connect, $center_lng),
+	mysqli_real_escape_string($connect, $center_lat),
+	mysqli_real_escape_string($connect, $radius));
 
 $result = transQuery($query, 0, 0);
 

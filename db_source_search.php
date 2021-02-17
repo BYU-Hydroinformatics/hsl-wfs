@@ -14,7 +14,7 @@ header("Content-type: text/xml");
 //Search the Data Table for SourceIDs
 
 $query = sprintf("SELECT DISTINCT SourceID, SiteID FROM seriescatalog WHERE SiteID ='%s'",
-	mysqli_real_escape_string($siteid));
+	mysqli_real_escape_string($connect, $siteid));
 $result = transQuery($query, 0, 0);
 
 foreach ($result as $row) {
@@ -22,7 +22,7 @@ foreach ($result as $row) {
 
 	$sourceid = $row['SourceID'];
 	$query1   = sprintf("SELECT SourceID, Organization, SourceLink FROM sources WHERE SourceID ='%s'",
-		mysqli_real_escape_string($sourceid));
+		mysqli_real_escape_string($connect, $sourceid));
 	$result1 = transQuery($query1, 0, 0);
 
 	$row1 = $result1[0];

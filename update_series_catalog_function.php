@@ -104,10 +104,10 @@ function update_series_catalog($siteID, $variableID, $methodID, $sourceID, $qcID
 		$endDateTimeUTC          = $row['EndDateTimeUTC'];
 		$valueCount              = $row['ValueCount'];
 
-		$siteName2          = mysqli_real_escape_string($siteName);
-		$methodDescription2 = mysqli_real_escape_string($methodDescription);
-		$sourceDescription2 = mysqli_real_escape_string($sourceDescription);
-		$citation2          = mysqli_real_escape_string($citation);
+		$siteName2          = mysqli_real_escape_string($connect, $siteName);
+		$methodDescription2 = mysqli_real_escape_string($connect, $methodDescription);
+		$sourceDescription2 = mysqli_real_escape_string($connect, $sourceDescription);
+		$citation2          = mysqli_real_escape_string($connect, $citation);
 
 		// run insert
 		$insert = "INSERT INTO seriescatalog (SiteID, SiteCode, SiteName, SiteType,
@@ -203,7 +203,7 @@ function update_series_catalog($siteID, $variableID, $methodID, $sourceID, $qcID
 		$endDateTimeUTC          = $row['EndDateTimeUTC'];
 		$valueCount              = $row['ValueCount'];
 
-		$methodDescription2 = mysqli_real_escape_string($methodDescription);
+		$methodDescription2 = mysqli_real_escape_string($connect, $methodDescription);
 
 		// run update
 		$update = "UPDATE seriescatalog SET

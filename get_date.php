@@ -17,9 +17,9 @@ $parnode = $dom->appendChild($node);
 
 // Search the rows in the markers table
 $query = sprintf("SELECT BeginDateTime, EndDateTime, SiteName FROM seriescatalog WHERE SiteID='%s' and VariableID='%s'and MethodID='%s'",
-	mysqli_real_escape_string($siteid),
-	mysqli_real_escape_string($varid),
-	mysqli_real_escape_string($methodid));
+	mysqli_real_escape_string($connect, $siteid),
+	mysqli_real_escape_string($connect, $varid),
+	mysqli_real_escape_string($connect, $methodid));
 $result = transQuery($query, 0, 0);
 
 if (!$result) {

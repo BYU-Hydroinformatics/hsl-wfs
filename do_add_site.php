@@ -6,7 +6,7 @@ if (!function_exists("GetSQLValueString")) {
 			$theValue = get_magic_quotes_gpc() ? stripslashes($theValue) : $theValue;
 		}
 
-		$theValue = function_exists("mysqli_real_escape_string") ? mysqli_real_escape_string($theValue) : mysqli_escape_string($theValue);
+		$theValue = function_exists("mysqli_real_escape_string") ? mysqli_real_escape_string($connect, $theValue) : mysqli_escape_string($theValue);
 
 		switch ($theType) {
 		case "text":
